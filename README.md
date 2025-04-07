@@ -1,20 +1,77 @@
 # Graph-Structure-With-Pattern-Search-Algorithm
+### 📌 Problem Definition
 
-Definition :
-The purpose of this project is to implement the data structure of the graph and perform search and navigation operations on it. Suppose we want to read a manuscript by a machine. One of the ways to do this is to identify different letters in the manuscript and from their combination words and finally the whole text can be read. We can consider the text in the form of a number of line segments that are connected at points and use graph vertices to display points and its edges as line segments as a data structure. This can be done both for the whole text and for each letter. Now, to read the text, we must look for subgraphs of the graph related to the text, which are similar to the graph related to the letters.
+The goal of this project is to implement a custom graph data structure and perform a subgraph pattern search within it. This problem is inspired by the challenge of enabling machines to read handwritten manuscripts by recognizing individual characters and matching them to known patterns.
 
-As a result, the main task in this manuscript reading algorithm is to find a specific subgraph in another graph.
-To be precise, two graphs are given to us as input, and we have to find the location of the second graph in the first graph as the output. The vertices of each graph have a number (label) and each edge has a label that indicates its angle with the positive direction of the horizontal axis. As a result, the geometric position of the edges adjacent to each vertex is known. As a result, we must look for a subgraph of the primary graph that be exactly compatible with the second graph.
+Imagine a manuscript where each letter can be represented as a small graph: line segments forming shapes, connected at specific angles and points. The entire text can then be seen as a larger graph, where vertices represent intersection points and edges represent line segments, each with a directional angle.
 
-Pay attention, the second graph may be found by turning the page in the first graph. Note that there is no need to control the length of the edges and the geometric accuracy of the graph.
+To read or recognize text, we need to search for a pattern graph (representing a known letter or symbol) within a larger graph (representing the scanned manuscript). Thus, the central task becomes:
 
-Our input is in two lines and in the form of sequences of ordered triplets which represent the edges of the two input graphs and the first, second and third components of these triplets are respectively the origin vertex, the destination vertex and the edge angle between these two.
-The output is in the form of sequences of two ordered nodes, each pair is the correspondence between the vertices of the first and second graph in the form of number of vertices, and this sequence is sorted alphabetically first based on the first component and then based on the second component in the output. If there is more than one match, the match that is smaller in alphabetical order is declared, and if there is no match, the word NOMATCH is placed in the output.
-We have not used any ready-made data structure except for the array and primitive numbers. For example, if a list is needed, it should be implemented by ourselves.
+- Given two graphs (G and P), find all occurrences of P as a subgraph of G, accounting for rotation.
 
-INPUT EXAMPLE:
-(1,2,45)(1,3,270)(3,4,45)
-(1,2,0)(1,3,45)
+### 🔍 Key Details
 
-OUTPUT EXAMPLE:
-(1,3)(3,1)(4,2)
+- Each vertex in the graph is identified by a number (label).
+
+- Each edge is defined by a triplet:
+    (origin_vertex, destination_vertex, angle)
+    where the angle is measured relative to the positive horizontal axis.
+
+- The geometry of the graph matters in terms of edge angles, but edge lengths are ignored.
+
+- The search must allow for rotations of the pattern graph (P) within the main graph (G), meaning the entire P can be rotated but must retain relative angles between edges.
+
+- Only basic data structures like arrays and primitive types are allowed—no use of built-in or advanced libraries for graphs or lists.
+
+
+### 🧠 Objective
+
+Given two graphs as input:
+
+  G: The main graph (e.g., the manuscript),
+
+  P: The pattern graph (e.g., a specific letter),
+
+Identify whether P appears as a subgraph within G, allowing for rotation but requiring structural and angular consistency.
+
+
+### 📥 Input Format
+
+  The input consists of two space-separated lines.
+
+  Each line contains a sequence of ordered triplets of the form:
+    (origin, destination, angle)
+
+  The first line represents the edges of the main graph (G).
+
+  The second line represents the edges of the pattern graph (P).
+
+### 📤 Output Format
+
+  If a matching subgraph is found, output a sequence of ordered pairs:
+    (vG, vP)
+    where vG is a vertex from the main graph and vP is the corresponding vertex from the pattern graph.
+
+  The output list must be sorted alphabetically, first by the vG and then by vP.
+
+  If multiple matches are possible, output the alphabetically smallest one.
+
+  If no match is found, output:
+  NOMATCH
+
+
+### 📚 Example
+
+Input:
+
+- (1,2,45)(1,3,270)(3,4,45) (1,2,0)(1,3,45)
+
+Output:
+
+- (1,3)(3,1)(4,2)
+
+### 📌 Constraints
+
+  No built-in data structures may be used except for arrays and basic numeric types.
+
+  All list-like structures or hash maps must be implemented manually.
